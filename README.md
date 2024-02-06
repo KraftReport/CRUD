@@ -1,1 +1,2 @@
-CRUD with java Servlet
+CRUD demo projects
+
