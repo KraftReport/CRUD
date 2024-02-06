@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="editBook" method="post" th:object="${editBook}">
+  <input type="text" name="title" id="title" th:value="${editBook.title}">
+  <input type="number" name="year" id="year" th:value="${editBook.year}">
+  <input type="submit" value="edit">
+</form>
+</body>
+</html>

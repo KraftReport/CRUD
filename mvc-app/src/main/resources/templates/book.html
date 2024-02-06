@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:insert="~{layout/navbar::navbar}"></div>
+	<h1>This is book page</h1>
+	<h1>Name - <div th:text="${login}"></div></h1>
+	<h1>Email - <div th:text="${email}"></div></h1>
+	<table>
+	<tr>
+	<th>Title</th>
+	<th>Year</th>
+		<th>Option</th>
+	</tr>
+	<th:block th:each="book :${books}">
+	<tr>
+	<td th:text="${book.title}"></td>
+	<td th:text="${book.year}"></td>
+	<td><a th:href="@{|/books/editPage?title=${book.title}|}">edit</a>
+		<a th:href="@{|/books/delete?title=${book.title}|}">Delete</a>
+	</td>
+	</tr>
+	</th:block>
+	</table>
+	<div th:insert="~{layout/footer::footer}"></div>
+	
+</body>
+</html>
