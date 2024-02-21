@@ -2,8 +2,11 @@ package com.ace.mvc.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.ace.mvc.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +30,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 @RequestMapping("/")
 public class userController {
+
+	Map<String ,String> emailToCode = new HashMap<>();
+
+	@Autowired
+	EmailService emailService;
 
 	private static int num = 0;
 
@@ -90,7 +98,8 @@ public class userController {
 	}
 	
 	@GetMapping("/changePassword")
-	public String change() {
+	public String change(@ModelAttribute User user,ModelMap modelMap)
+	{
 		return "changePassword";
 	}
 
@@ -205,18 +214,42 @@ public class userController {
 	}
 	
 	@PostMapping("/forgetPassword")
-	public String forgetPass(@ModelAttribute User user1,RedirectAttributes reat,HttpSession htse) {
-		System.err.println(user1 + " user one");
-		var user = userService.findPasswordByEmail(user1.getEmail());
-		htse.setAttribute("foundUser",user.get(0));
-		System.err.println("user +" + user);
-		return "changePassword";
+	public String forgetPass(ModelMap modelMap,@RequestParam("email")String email,@RequestParam(value = "code",required = false)String code,RedirectAttributes reat,HttpSession htse) {
+		System.err.println(email + " user one");
+		if(code==null || code.isEmpty() || code.isBlank()){
+			var user = userService.findPasswordByEmail(email);
+			if(user==null || user.isEmpty() ){
+				reat.addFlashAttribute("errorMsg","no user with such email is found");
+				return "login";
+			}else{
+				var codeToSend = emailService.generateCode();
+				emailService.sendEmail(email,codeToSend);
+				emailToCode.put(email,codeToSend);
+				reat.addFlashAttribute("OTP","OTP");
+				reat.addFlashAttribute("succMsg","OTP is send to your email");
+				return "redirect:/forgetPassword";
+			}
+		}else {
+			var storeCode = emailToCode.get(email.trim());
+			if (storeCode != null && storeCode.equals(code.trim())) {
+				modelMap.addAttribute("succMst", "OTP is correct change new password");
+				modelMap.addAttribute("foundUser",userService.findPasswordByEmail(email).get(0));
+				return "changePassword";
+			} else {
+				reat.addFlashAttribute("errorMsg", "OTP is wrong");
+				return "redirect:/forgetPasswrod";
+			}
+		}
 	}
 	
 	@PostMapping("/changePassword")
-	public String changePassword(@RequestParam(required = true,name="password")String password,HttpSession htse,RedirectAttributes reat) {
-		var user =(User) htse.getAttribute("foundUser");
-		user.setPassword(password);
+	public String changePassword(@ModelAttribute User user1,HttpSession htse,RedirectAttributes reat,ModelMap modelMap) {
+//		var user =(User) modelMap.getAttribute("foundUser");
+		System.out.println(user1.getId());
+		var user = userService.findById(user1.getId());
+		System.out.println(user);
+        assert user != null;
+        user.setPassword(user1.getPassword());
 		var b = userService.updateUser(user);
 		if(b) {
 			reat.addFlashAttribute("succMsg","password is changed successfully");

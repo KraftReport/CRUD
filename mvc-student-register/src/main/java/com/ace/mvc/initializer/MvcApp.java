@@ -23,9 +23,7 @@ public class MvcApp extends AbstractAnnotationConfigDispatcherServletInitializer
 	}
 	
 	@Override
-	protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-
-		// Optionally also set maxFileSize, maxRequestSize, fileSizeThreshold
+	protected void customizeRegistration(ServletRegistration.Dynamic registration) { 
 		registration.setMultipartConfig(new MultipartConfigElement("/tmp"));
 	}
 

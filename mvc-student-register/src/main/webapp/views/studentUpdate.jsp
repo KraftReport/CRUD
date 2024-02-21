@@ -162,9 +162,9 @@
 				<div class="col-md-2"></div>
 				<label for="name" class="col-md-2 text-dark col-form-label">Photo</label>
 				<div class="col-md-4">
-					<input type="file" size="50"   class="form-control" name="photo"
-						id="name"    > <img style="width: 120px; height: 100px;"
-						src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(student.photo.getBytes())} " />
+				   <input type="file" size="50"  value="C:\Users\KraftWork\Pictures\9a16492f403886e14343e071e49cb4a0.jpg" class="form-control" name="photo"
+						id="name"/><img style="width: 120px; height: 100px;"
+						src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(student.photo.getBytes())}"/>  
 				</div>
 			</div>
 
@@ -214,6 +214,26 @@
 	<span>Copyright &#169; ACE Inspiration 2022</span>
 </div>
 <script>
+
+const preselectedFile = document.getElementById('preselected-file');
+const fileInput = document.getElementById('name');
+const previewImage = document.getElementById('preview-image');
+
+if (preselectedFile.value) {
+  // Decode base64 data and create temporary URL
+  const decodedData = atob(preselectedFile.value.split(',')[1]);
+  const blob = new Blob([decodedData], { type: 'image/jpeg' });
+  const imageUrl = URL.createObjectURL(blob);
+
+  // Set image preview and trigger click event (optional)
+  previewImage.src = imageUrl;
+  fileInput.click(); // Simulate user interaction (uncomment if needed)
+}
+
+ 
+
+
+
 	/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
 	var dropdown = document.getElementsByClassName("dropdown-btn");
 	var i;

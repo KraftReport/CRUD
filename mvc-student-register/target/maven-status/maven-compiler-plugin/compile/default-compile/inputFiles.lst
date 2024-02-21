@@ -1,3 +1,4 @@
+C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\config\JavaMailConfig.java
 C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\config\RootConfig.java
 C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\config\ServletConfig.java
 C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\connection\ConnectionCaller.java
@@ -11,8 +12,10 @@ C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\
 C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\model\Student.java
 C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\model\User.java
 C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\service\CourseService.java
+C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\service\EmailService.java
 C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\service\StudentService.java
 C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\service\UserService.java
 C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\serviceImpl\CourseServiceImpl.java
+C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\serviceImpl\EmailServiceImpl.java
 C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\serviceImpl\StudentServiceImpl.java
 C:\Users\KraftWork\Desktop\MVCWS\mvc-student-register\src\main\java\com\ace\mvc\serviceImpl\UserServiceImpl.java

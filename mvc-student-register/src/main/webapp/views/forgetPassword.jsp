@@ -29,6 +29,9 @@
           </div>
         <form class="login-form" action="forgetPassword" method="post"  >
           <input type="text" placeholder="Email" name="email" required="required"/>
+          <c:if test="${not empty OTP}">
+          <input type="text" name="code" required/>
+          </c:if>
           <button>Submit</button>
         </form>
       </div>

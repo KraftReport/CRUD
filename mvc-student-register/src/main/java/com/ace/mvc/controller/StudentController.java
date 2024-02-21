@@ -126,6 +126,11 @@ public class StudentController {
 	
 	@PostMapping("/studentUpdate")
 	public String stuUpdate(@ModelAttribute Student stu,ModelMap mm,HttpSession htse) {
+		System.err.println("----");
+		if(stu.getPhoto().isEmpty()) {
+			stu.setPhoto(studentService.findById(stu.getId()).get(0).getPhoto());
+			System.err.println(studentService.findById(stu.getId()).get(0).getPhoto());
+		}
 		var b =  studentService.updateStudet(stu);
 		if(b) {
 			mm.addAttribute("succMsg","Student is updated successfully");

@@ -79,8 +79,8 @@
 					<select class="form-select" aria-label="Education" disabled="disabled" id="role"
 						name="role">
 						
-						<option   value="admin">Admin</option>
-						<option selected="selected" value="user">User</option>
+						<option  name ="role"  value="admin">Admin</option>
+						<option selected="selected" name="role" value="user">User</option>
 			</select>
 			
 					

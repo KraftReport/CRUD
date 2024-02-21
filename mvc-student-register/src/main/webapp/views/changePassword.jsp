@@ -29,9 +29,10 @@
           </div>
         <form class="login-form" action="changePassword" method="post" name="confirm">
         <b>Old Password</b>
-       <input type="text" value="${foundUser.password }" disabled="disabled" />
+        <input type="hidden" value="${foundUser.id}" name="id" />
+       <input type="text"  value="${foundUser.password }" disabled="disabled" />
         <b>New Password</b>
-          <input type="text" placeholder="New Passwrod" name="password" required="required"/>
+          <input type="text" placeholder="New Password" name="password" required="required"/>
           <button>Submit</button>
         </form>
       </div>
