@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="navbar">
+
+    <div class=row >
+        <div class="col-md-5 ">
+            <h3>Student Registration</h3>
+        </div>
+        <div th:if="${session.loginUser != null}" class="col-md-6">
+            <p th:text="${session.loginUser.name}">:<p th:text="${session.loginUser.role}">____</p>___</p>
+            <p th:text="${session.currentDate}"></p>
+        </div>
+        <div class="col-md-1" >
+            <input type="button" class="btn-basic" id="lgnout-button" value="Log Out" onclick="location.href='logout'">
+        </div>
+    </div>
+</div>
+</html>

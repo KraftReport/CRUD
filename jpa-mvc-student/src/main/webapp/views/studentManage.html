@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="studentSearch" method="post">
+
+        <select name="course">
+            <div th:each="c :${allCourse}">
+            <option th:value="${c.name}" th:text="${c.name}"></option>
+            </div>
+        </select>
+
+    <input type="submit" value="search">
+</form>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Photo</th>
+            <th>Option</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${allStudent}">
+            <td th:text="${student.id}"></td>
+            <td th:text="${student.name}"></td>
+            <td th:each="c :${student.courseList}">
+                <b th:text="${c.name}"></b>
+            </td>
+            <td>
+                <img style="width: 120px; height: 100px;" th:src="@{'data:image/jpeg;base64,'+${student.photoString}}" alt="">
+            </td>
+            <td>
+                <a th:href="@{'studentUpdate?id='+${student.id}}">
+                    <button>Update</button>
+                </a>
+                <button>Delete</button>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+</body>
+</html>

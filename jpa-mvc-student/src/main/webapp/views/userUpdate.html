@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="testheader">
+<div th:replace="navbar.html :: navbar"></div>
+<div th:replace="sidebar.html :: sidebar"></div>
+<div class="main_contents">
+    <div id="sub_content">
+        <form action="userUpdate" method="post">
+
+        <h2 class="col-md-6 offset-md-2 mb-5 mt-4">User Update</h2>
+            <input type="hidden" name="id" th:value="${updateUser.id}" >
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="confirmPassword" class="col-md-2 col-form-label">Name</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="confirmPassword" name="name" th:value="${updateUser.name}">
+                </div>
+            </div>
+
+        <div class="row mb-4">
+            <div class="col-md-2"></div>
+            <label for="email" class="col-md-2 col-form-label">Email</label>
+            <div class="col-md-4">
+                <input type="email" class="form-control" name="email" id="email" th:value="${updateUser.email}">
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-2"></div>
+            <label class="col-md-2 col-form-label">Passowrd</label>
+            <div class="col-md-4">
+                <input type="password" class="form-control" id="name" name="password" th:value="${updateUser.password}">
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-2"></div>
+            <label for="userRole" class="col-md-2 col-form-label">User Role</label>
+            <div class="col-md-4">
+                <select  class="form-select" th:field="${updateUser.role}" aria-label="Education" name="role" id="userRole">
+                    <option  value="ADMIN"   th:selected="${updateUser.role=='ADMIN'}" >ADMIN</option>
+                    <option  value="USER"  th:selected="${updateUser.role=='USER'}" >USER</option>
+                </select>
+
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-4"></div>
+
+            <div class="col-md-6">
+
+
+                <button type="submit" class="btn btn-success col-md-2">Update</button>
+
+                <button type="button" class="btn btn-secondary col-md-2" th:href="@{userManage}">Back</button>
+
+            </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+<script>
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var dropdownContent = this.nextElementSibling;
+      if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+      } else {
+      dropdownContent.style.display = "block";
+      }
+      });
+    }
+</script>
+</body>
+
+</html>
+

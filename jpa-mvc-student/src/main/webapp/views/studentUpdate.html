@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="studentUpdate" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${updateStudent.id}">
+    <input type="text" name="name" th:value="${updateStudent.name}">
+    <input type="text" name="phone" th:value="${updateStudent.phone}">
+    <input type="date" name="dob" th:value="${updateStudent.dob}">
+    <select name="gender" th:field="*{updateStudent.gender}">
+        <option th:selected="${updateStudent.gender == 'MALE'}" value="MALE">male</option>
+        <option th:selected="${updateStudent.gender == 'FEMALE'}" value="FEMALE">female</option>
+    </select>
+    <select name="education" th:field="*{updateStudent.education}">
+        <option th:selected="${updateStudent.education == 'degree'}" value="degree">degree</option>
+        <option th:selected="${updateStudent.education == 'diploma'}" value="diploma">diploma</option>
+    </select>
+    <div th:each=" c :${allCourse}">
+        <div th:each="s :${updateStudent.courseList}">
+            <input th:checked="${s.name == c.name}" type="checkbox" name="course" th:value="${c.name}" th:text="${c.name}" >
+        </div>
+    </div>
+    <td>
+        <img style="width: 120px; height: 100px;" th:src="@{'data:image/jpeg;base64,'+${updateStudent.photoString}}" alt="">
+    </td>
+    <input type="file" size="50" name="photo" >
+    <input type="submit"  value="send">
+</form>
+</body>
+</html>
