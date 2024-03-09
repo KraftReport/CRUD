@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment.html :: header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragment.html :: navbar"></div>
+    <h1>Add Employee</h1>
+    <form id="form" th:action="@{/userRegister}" th:object="${UserDTO}" class="offset-3 col-3" enctype="multipart/form-data"  method="post">
+        <input type="hidden" th:field="*{id}" >
+        <div id="error"></div>
+
+            <input type="text" id="name" th:field="*{name}" placeholder="enter name" class="form-control col-4 mb-4"><br>
+
+
+            <input type="text" id="email" th:field="*{email}" placeholder="enter email" class="form-control col-4 mb-4"><br>
+
+            <input type="password" id="password" th:field="*{password}" placeholder="enter password" class="form-control col-4 mb-4"><br>
+            <input type="password" id="confirmPassword"  placeholder="enter confirm password" class="form-control col-4 mb-4"><br>
+
+            <select hidden  th:field="*{role}" class="form-control col-4 mb-4"> 
+                <option value="USER">USER</option>
+            </select>
+
+        <input type="file" id="photo" th:field="*{photo}" placeholder="choose photo" size="50" class="form-control col-4 mb-4" /><br>
+
+        <input type="submit" value="register" class="btn btn-primary">
+        <a th:if="${#ctx.session.loginUserName != null}" type="button"  th:href="@{/userManage}" class="btn btn-danger">Back</a>
+        <a th:if="${#ctx.session.loginUserName == null}" type="button"  th:href="@{/login}" class="btn btn-danger">Back</a>
+    </form>
+    <script th:replace="fragment.html :: script1"></script>
+    <script th:replace="fragment.html :: script2"></script>
+    <script th:replace="fragment.html :: script3"></script>
+    <script th:replace="fragment.html :: script4"></script>
+    <script>
+        let currentDate = new Date().toDateString()
+let element = document.getElementById("currentDate")
+element.textContent = "Date : " + currentDate
+
+const form = document.getElementById("form")
+const userName = document.getElementById("name")
+const userEmail = document.getElementById("email")
+const userPassword = document.getElementById("password") 
+const photo = document.getElementById("photo")
+const error = document.getElementById("error")
+form.addEventListener('submit',(e)=>{
+   let messages = []
+   let regax = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+   if(userName.value === '' || userName.value == null){
+       messages.push('Name is required')
+   }
+
+   if(userEmail.value === '' || userEmail.value == null ){
+       messages.push('Email is required')
+   }
+
+   if( !regax.test(userEmail.value)){
+       messages.push('Email must be in email format')
+   }
+
+    
+
+   if(userPassword.value === '' || userPassword.value == null){
+       messages.push('Password is required')
+   }
+
+   if(userPassword.value.length <10){
+       messages.push('Password must be at least ten characters')
+   }
+
+   if(photo.value === '' || photo.value == null){
+       messages.push('Profile picture is required')
+   }
+
+   if(messages.length>0){
+       e.preventDefault()
+       error.innerText = messages.join(',')
+   }else {
+       error.innerText = ''; // Clear error message if no validation errors
+   }
+})
+    </script>
+</div>
+</body>
+</html>

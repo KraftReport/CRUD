@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment.html :: header">
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+<div class="container p-5">
+    <h3 class="offset-3 col-3 text-warning">Login</h3>
+    <form th:action="@{/login}" class="offset-3 col-3" method="post" th:object="${UserDTO}">
+        <input type="text" th:field="*{email}" class="form-control col-4 mb-4" placeholder="Enter email">
+        <input type="password" th:field="*{password}" class="form-control col-4 mb-4" placeholder="Enter password">
+        <input type="submit" value="Login" class="btn btn-danger">
+        <a th:href="@{/forgotPassword}" class="btn btn-success">Forgot Password</a>
+        <a th:href="@{/userRegister}" class="btn btn-primary m-1">Register</a>
+    </form>
+
+
+</div>
+<script th:replace="fragment.html :: script1"></script>
+<script th:replace="fragment.html :: script2"></script>
+<script th:replace="fragment.html :: script3"></script>
+<script th:replace="fragment.html :: script4"></script>
+</body>
+</html>

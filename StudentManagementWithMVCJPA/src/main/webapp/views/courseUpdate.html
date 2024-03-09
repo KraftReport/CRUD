@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment.html :: header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragment.html :: navbar"></div>
+    <div class="card text-center">
+        <div class="card-header">
+            Update Course
+        </div>
+        <div class="offset-4 col-3 ">
+            <div class="container-fluid">
+                <div class="card-body ">
+                    <form th:action="@{/courseUpdate}" th:object="${courseUpdate}" method="post">
+                        <input type="hidden" th:field="*{id}">
+                        <input class="form-control col-4 mb-4" type="text"  th:field="*{name}" placeholder="enter course name">
+                        <select  th:field="*{status}" class="form-control col-4 mb-4">
+                            <option th:selected="${courseUpdate.status == 'UNAVAILABLE'}" value="UNAVAILABLE">UNAVAILABLE</option>
+                            <option th:selected="${courseUpdate.status == 'AVAILABLE'}"  value="AVAILABLE">AVAILABLE</option>
+                        </select>
+                        <input type="submit" value="Update" class="btn btn-primary">
+                        <a th:href="@{/courseManage}"><input type="button" value="Back" class="btn btn-danger"></a>
+                    </form>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<script th:replace="fragment.html :: script1"></script>
+<script th:replace="fragment.html :: script2"></script>
+<script th:replace="fragment.html :: script3"></script>
+<script th:replace="fragment.html :: script4"></script>
+</body>
+</html>

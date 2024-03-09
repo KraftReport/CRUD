@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment.html :: header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+
+    <div th:replace="fragment.html :: navbar"></div>
+    <h3>Student List</h3>
+    </hr>
+    <a th:href="@{/studentRegister}" class="btn btn-primary mb-2">Add Student</a>
+    <div>
+        <!-- <form th:action="@{/studentSearch}" method="post">
+                <select name="course">
+                    <option value="" name="course">---</option>
+                    <option th:each="c :${courses}" th:if="${c.status != 'UNAVAILABLE'}" name="course"  th:value="${c.name}" th:text="${c.name}"></option>
+                </select>
+            
+                <select name="status">
+                    <option value="" name="status">---</option>
+                    <option   name="status"  value="AVAILABLE">Active</option>
+                    <option   name="status"  value="UNAVAILABLE">Not active</option>
+                </select>
+            <input type="submit" value="search ">
+        </form> -->
+    </div>
+    <div>
+        <button><a th:href="@{/pdf1(export='pdf')}" class="btn btn-info">Generate PDF</a></button>
+        <button><a th:href="@{/excel1(export='excel')}" class="btn btn-info">Generate exel</a></button>
+    </div>
+    <table class="table table-bordered table-striped" id="table">
+
+        <thead>
+        <tr>
+            <th>Photo</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Courses</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student:${students}">
+            <td><img style="width: 120px; height: 100px;" th:src="@{'data:image/jpeg;base64,'+${student.photoString}}"  alt="image" ></td>
+            <td th:text="${student.id}"></td>
+            <td th:text="${student.name}"></td>
+            <td><b th:each="s : ${student.courseList}" th:text="' '+${s.name}"></b></td>
+
+            <td th:if="${student.status == 'AVAILABLE'}">
+                <a th:href="@{/studentUpdate(id=${student.id})}" class="btn btn-info">Update</a>
+                <a th:href="@{/studentDelete(id=${student.id})}" class="btn btn-danger">Remove</a>
+            </td>
+            <td th:if="${student.status == 'UNAVAILABLE'}">
+                <a th:href="@{/studentUpdate(id=${student.id})}" class="btn btn-info">Update</a>
+                <button class="btn btn-danger">not active</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <script th:replace="fragment.html :: script1"></script>
+    <script th:replace="fragment.html :: script2"></script>
+    <script th:replace="fragment.html :: script3"></script>
+    <script th:replace="fragment.html :: script4"></script>
+</div>
+</body>
+</html>

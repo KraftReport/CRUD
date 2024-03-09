@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment.html :: header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragment.html :: navbar"></div>
+    <div class="card text-center">
+        <div class="card-header">
+            Update Student
+        </div>
+        <div class="offset-4 col-4 ">
+            <div class="card-body">
+                <form th:action="@{/studentUpdate}" th:object="${student}" method="post" class="" enctype="multipart/form-data">
+                    <input type="hidden" th:field="*{id}" th:value="${student.id}">
+                    <input class="form-control col-4 mb-4" type="text"   th:field="*{name}" placeholder="enter student name">
+                    <input class="form-control col-4 mb-4" type="text"  th:field="*{phone}" placeholder="enter phone number">
+                    <input class="form-control col-4 mb-4" type="date"   th:field="*{dob}" placeholder="enter birthday">
+                    <select class="form-control col-4 mb-4" th:field="*{gender}" >
+                        <option th:selected="${student.gender == 'MALE'}" value="MALE">MALE</option>
+                        <option th:selected="${student.gender == 'FEMALE'}" value="FEMALE">FEMALE</option>
+                    </select>
+                    <select class="form-control col-4 mb-4" th:field="*{education}">
+                        <option th:selected="${student.education == 'DEGREE'}" value="DEGREE">Degree</option>
+                        <option th:selected="${student.education == 'DIPLOMA'}" value="DIPLOMA">Diploma</option>
+                        <option th:selected="${student.education == 'CERTIFICATE'}" value="CERTIFICATE">Certificate</option>
+                    </select>
+                    <div th:each="c:${courses}" >
+                                <input   th:checked="${line.contains(c.name)}" type="checkbox" name="courses" th:value="${c.name}"  th:text="${c.name}" >
+                        </div>
+                    <select  th:field="*{status}" class="form-control col-4 mb-4">
+                        <option th:selected="${student.status == 'AVAILABLE'}" value="AVAILABLE">AVAILABLE</option>
+                        <option th:selected="${student.status == 'UNAVAILABLE'}" value="UNAVAILABLE">UNAVAILABLE</option>
+                    </select>
+                    <div> <img  style="width: 120px; height: 100px;" th:src="@{'data:image/jpeg;base64,'+${student.photoString}}"  alt="image" ></div>
+                    <input type="file" size="50" th:field="*{photo}" class="form-control col-4 mb-4">
+                    <input type="submit" value="Update" class="btn btn-primary">
+                    <a th:href="@{/studentManage}"><input type="button" value="Back" class="btn btn-danger"></a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:replace="fragment.html :: script1"></script>
+<script th:replace="fragment.html :: script2"></script>
+<script th:replace="fragment.html :: script3"></script>
+<script th:replace="fragment.html :: script4"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment.html :: header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <button><a th:href="@{/pdf(export='pdf')}" class="btn btn-info">Generate PDF</a></button>
+    <button><a th:href="@{/excel(export='excel')}" class="btn btn-info">Generate exel</a></button>
+    <div th:replace="fragment.html :: navbar"></div>
+    <a th:href="@{/userRegister}"><button class="btn btn-primary">Register</button></a>
+    
+    <table class="table" id="table">
+        <thead>
+        <tr>
+            <th>Profile</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user :${ Users}">
+            <td><img style="width: 120px; height: 100px;" th:src="@{'data:image/jpeg;base64,'+${user.photoString}}"  alt="image" ></td>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td >
+                <a th:href="@{/userUpdate(id=${user.id})}" class="btn btn-info">Update</a>
+                <a th:href="@{/userDelete(id=${user.id})}" class="btn btn-danger">Remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+<script th:replace="fragment.html :: script1"></script>
+<script th:replace="fragment.html :: script2"></script>
+<script th:replace="fragment.html :: script3"></script>
+<script th:replace="fragment.html :: script4"></script>
+</div>
+</body>
+</html>

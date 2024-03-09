@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 9.0.0.final using JasperReports Library version 6.21.0-4f56c4f36cd19e17675219a9ac4692d5f0f13b06  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="user" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8d3853d4-f652-4874-b53b-34485c2b8895">
+    <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+    <field name="id" class="java.lang.Integer"/>
+    <field name="email" class="java.lang.String"/>
+    <field name="name" class="java.lang.String"/>
+    <field name="password" class="java.lang.String"/>
+    <field name="photo" class="byte[]"/>
+    <field name="role" class="com.ace.entity.Role"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <detail>
+        <band height="53" splitType="Stretch">
+            <textField>
+                <reportElement x="0" y="10" width="101" height="31" uuid="7388096c-95f9-4814-9e26-89214ccbabe1"/>
+                <textElement textAlignment="Center">
+                    <font size="14" isBold="false" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="460" y="10" width="101" height="31" uuid="695d9e8e-d417-4a93-b569-7ddfa6df5c98"/>
+                <textElement textAlignment="Center">
+                    <font size="14" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{role}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="331" y="10" width="129" height="31" uuid="6811b238-605b-49bb-9c1f-76d84a326ab5"/>
+                <textElement textAlignment="Center">
+                    <font size="14" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{password}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="201" y="11" width="130" height="31" uuid="0c8ac697-0081-4143-8b18-6728637f51c6"/>
+                <textElement textAlignment="Center">
+                    <font size="14" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="100" y="10" width="101" height="31" uuid="72c5834b-9b57-456b-b751-ee00679b4639"/>
+                <textElement textAlignment="Center">
+                    <font size="14" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

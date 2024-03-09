@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment.html :: header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragment.html :: navbar"></div>
+    <h3>Course List</h3>
+    </hr>
+    <a th:href="@{/courseRegister}" class="btn btn-primary mb-2">Add Course</a>
+    <table class="table table-bordered table-striped" id="table">
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course:${courses}">
+            <td th:text="${course.id}"></td>
+            <td th:text="${course.name}"></td>
+            <td th:if="${course.status == 'AVAILABLE'}">
+                <a th:href="@{/courseUpdate(id=${course.id})}" class="btn btn-info">Update</a>
+                <a th:href="@{/courseDelete(id=${course.id})}" class="btn btn-danger">Close</a>
+            </td>
+            <td th:if="${course.status == 'UNAVAILABLE'}">
+                <a th:href="@{/courseUpdate(id=${course.id})}" class="btn btn-info">Open</a>
+                <button class="btn btn-danger">Currently closed</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <script th:replace="fragment.html :: script1"></script>
+    <script th:replace="fragment.html :: script2"></script>
+    <script th:replace="fragment.html :: script3"></script>
+    <script th:replace="fragment.html :: script4"></script>
+</div>
+</body>
+</html>

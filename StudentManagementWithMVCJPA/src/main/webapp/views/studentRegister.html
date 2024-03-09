@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment.html :: header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragment.html :: navbar"></div>
+    <div class="card text-center">
+        <div class="card-header">
+            Register Student
+        </div>
+       <div class="offset-4 col-4 ">
+           <div class="card-body">
+               <form id="form" th:action="@{/studentRegister}" th:object="${student}" method="post" class="" enctype="multipart/form-data">
+                   <div id="error"></div>
+                   <input id="name" class="form-control col-4 mb-4" type="text" th:field="*{name}" placeholder="enter student name">
+                   <input id="phone" class="form-control col-4 mb-4" type="text" th:field="*{phone}" placeholder="enter phone number">
+                   <input id="dob" class="form-control col-4 mb-4" type="date" th:field="*{dob}" placeholder="enter birthday">
+                   <select class="form-control col-4 mb-4" th:field="*{gender}" >
+                       <option value="MALE">MALE</option>
+                       <option value="FEMALE">FEMALE</option>
+                   </select>
+                   <select class="form-control col-4 mb-4" th:field="*{education}">
+                       <option value="DEGREE">Degree</option>
+                       <option value="DIPLOMA">Diploma</option>
+                       <option value="CERTIFICATE">Certificate</option>
+                   </select>
+                   <div  th:each="course : ${courses}" class="  col-4 mb-4">
+                    <div th:if="${course.status != 'UNAVAILABLE'}">
+                        <input  id="courses" th:text="${course.name}"  th:value="${course.name}" type="checkbox" th:field="*{courses}">
+                    </div>
+                   </div>
+                   <select  th:field="*{status}" class="form-control col-4 mb-4">
+                       <option value="AVAILABLE">AVAILABLE</option>
+                   </select>
+                   <input id="photo" type="file" size="50" th:field="*{photo}" class="form-control col-4 mb-4">
+                   <input type="submit" value="Register" class="btn btn-primary">
+                   <a th:href="@{/studentManage}"><input type="button" value="Back" class="btn btn-danger"></a>
+               </form>
+           </div>
+       </div>
+    </div>
+</div>
+<script th:replace="fragment.html :: script1"></script>
+<script th:replace="fragment.html :: script2"></script>
+<script th:replace="fragment.html :: script3"></script>
+<script th:replace="fragment.html :: script4"></script>
+<script>
+    const form = document.getElementById("form")
+ const userName = document.getElementById("name")
+ const phone = document.getElementById("phone")
+ const dob = document.getElementById("dob")
+ const course = document.getElementById("courses")
+ const photo = document.getElementById("photo")
+ const error = document.getElementById("error")
+ form.addEventListener('submit',(e)=>{
+     let messages = []
+     let regax = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+     if(userName.value === '' || userName.value == null){
+         messages.push('Name is required')
+     }
+
+     if(phone.value === '' || phone.value == null){
+         messages.push('phone is required')
+     }
+
+     if(dob.value === '' || dob.value == null){
+         messages.push('date of birth is required')
+     }
+
+     if(course.length<1){
+         messages.push('course is required')
+     }
+
+     if(photo.value === '' || photo.value == null){
+         messages.push('Profile picture is required')
+     }
+
+     if(messages.length>0){
+         e.preventDefault()
+         error.innerText = messages.join(',')
+     }else {
+         error.innerText = ''; // Clear error message if no validation errors
+     }
+ })
+</script>
+</body>
+</html>
