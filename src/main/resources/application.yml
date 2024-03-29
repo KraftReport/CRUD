@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    password: admin
+    url: jdbc:mysql://localhost:3306/bootjpa
+    username: root
+  jpa:
+    database: mysql
+    generate-ddl: true
+    open-in-view: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        ddl-auto: update
+

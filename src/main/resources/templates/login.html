@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="~{fragment/main::header}"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body class="login-page-body">
+
+<div class="login-page">
+    <div class="form">
+        <div class="login">
+            <div class="login-header">
+                <h1>Welcome!</h1>
+                <p>Please check your data again.</p>
+            </div>
+        </div>
+        <form class="login-form" data-th-action="@{/login}" method="post">
+            <input type="text" name="name" placeholder="Enter email" />
+            <input type="password" name="password" placeholder="Enter Password" />
+            <button type="submit">login</button>
+            <p class="message">Not registered? <a th:href="@{/member/userRegister}">Create an account</a></p>
+ 
+            <p class="message">Forgot Password? <a th:href="@{/member/changePassword}">Change Password</a></p>
+  <!-- Modal -->
+  
+        </form>
+    </div>
+</div>
+
+ 
+
+</body>
+
+</html>
