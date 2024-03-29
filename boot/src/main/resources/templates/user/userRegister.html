@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{fragment/main::header}"></head>
+
+<body>
+    <div id="testheader" th:replace="~{fragment/main::navbar}"> </div>
+
+</div>
+    <!-- <div id="testsidebar">Hello World </div> -->
+    <div class="container">
+    <div class="sidenav" th:replace="~{fragment/main::sidebar}"> </div>
+    <div class="main_contents" id="error">
+        <div id="sub_content">
+            <form class="text-dark" th:action="@{/member/userRegister}" th:object="${user}" id="form" method="post" enctype="multipart/form-data">
+
+            <h2 class="col-md-6 offset-md-2 mb-5 mt-4">User Registration</h2>
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="name"  class="col-md-2 col-form-label">Name</label>
+                <div class="col-md-4">
+                    <span th:errors="*{name}" class="text-secondary" style="color: red">Error</span>
+                    <input type="text" th:field="*{name}" class="form-control" id="name" >
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="email"  class="col-md-2 col-form-label">Email</label>
+                <div class="col-md-4">
+                    <span th:errors="*{email}" class="text-secondary" style="color: red">Error</span>
+                    <input type="email" class="form-control"   th:field="*{email}" id="email"  >
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="Passowrd" class="col-md-2 col-form-label">Passowrd</label>
+                <div class="col-md-4">
+                    <span th:errors="*{password}" class="text-secondary" style="color: red">Error</span>
+                    <input type="password" th:field="*{password}"  class="form-control" id="password"  >
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="confirmPassword" class="col-md-2 col-form-label">Confirm Passowrd</label>
+                <div class="col-md-4">
+                    <span th:errors="*{password}" class="text-secondary" style="color: red">Error</span>
+                    <input type="password" class="form-control" id="confirmPassword"  >
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="Passowrd" class="col-md-2 col-form-label">Address</label>
+                <div class="col-md-4">
+                    <span th:errors="*{address}" class="text-secondary" style="color: red">Error</span>
+                    <input type="text" th:field="*{address}"  class="form-control" id="address"  >
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="userRole" class="col-md-2 col-form-label">User Role</label>
+                <div class="col-md-4">
+                    <select th:field="*{role}" class="form-select" aria-label="Education" id="userRole">
+                        <option selected value="ADMIN">Admin</option>
+                        <option value="MEMBER">User</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="Passowrd" class="col-md-2 col-form-label">Passowrd</label>
+                <div class="col-md-4">
+                    <input type="file" size="50" th:field="*{file}" id="photo">
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-4"></div>
+
+                <div class="col-md-6">
+                    <button type="submit" id="button" class="btn btn-secondary col-md-2" >Add</button>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragment/main :: footer}"></div>
+    
+</div>
+<script>
+    let currentDate = new Date().toDateString()
+let element = document.getElementById("currentDate")
+element.textContent = "Date : " + currentDate
+
+const form = document.getElementById("form")
+const userName = document.getElementById("name")
+const userEmail = document.getElementById("email")
+const userPassword = document.getElementById("password") 
+const userConfirmPassword = document.getElementById("confirmPassword")
+const photo = document.getElementById("photo")
+const error = document.getElementById("error")
+const address = document.getElementById("address")
+const button = document.getElementById("button")
+button.addEventListener('click',(e)=>{
+   console.log("hello")
+  let messages = []
+  let regax = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if(userName.value === '' || userName.value == null){
+      messages.push('Name is required')
+  }
+
+  if(userEmail.value === '' || userEmail.value == null ){
+      messages.push('Email is required')
+  }
+
+  if( !regax.test(userEmail.value)){
+      messages.push('Email must be in email format')
+  }
+
+  if(userConfirmPassword.value != userPassword.value){
+   messages.push('password not match')
+  }
+  if(userPassword.value === '' || userPassword.value == null){
+      messages.push('Password is required')
+  }
+
+  if(address.value == null || address.value === ''){
+   messages.push('address is needed')
+  }
+
+  if(userPassword.value.length <10){
+      messages.push('Password must be at least ten characters')
+  }
+
+  if(photo.value === '' || photo.value == null){
+      messages.push('Profile picture is required')
+  }
+
+  if(messages.length>0){
+      e.preventDefault()
+      error.innerText = messages.join(',')
+  }else {
+      error.innerText = ''; // Clear error message if no validation errors
+  }
+})
+document.addEventListener('DOMContentLoaded',()=>console.log("hello"))
+   </script>
+</body>
+
+</html>
+
+

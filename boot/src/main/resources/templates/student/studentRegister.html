@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{fragment/main::header}"></head>
+
+<body>
+    <div id="testheader" th:replace="~{fragment/main::navbar}"> </div>
+
+</div>
+    <!-- <div id="testsidebar">Hello World </div> -->
+    <div class="container">
+    <div class="sidenav" th:replace="~{fragment/main::sidebar}"> </div>
+    <div class="main_contents">
+        <div id="sub_content">
+            <form th:action="@{/member/studentRegister}" th:object="${student}" method="post" enctype="multipart/form-data">
+
+            <h2 class="col-md-6 offset-md-2 mb-5 mt-4">Student Registration</h2>
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="name"  class="col-md-2 col-form-label">Name</label>
+                <div class="col-md-4">
+                    <span th:errors="*{name}" class="text-secondary" style="color: red">Error</span> 
+                    <input type="text" th:field="*{name}" class="form-control" id="name" >
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="date"  class="col-md-2 col-form-label">Date of Birth</label>
+                <div class="col-md-4">
+                    <span th:errors="*{dob}" class="text-secondary" style="color: red">Error</span>
+                    <input type="date" class="form-control"   th:field="*{dob}" id="email"  >
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="Passowrd" class="col-md-2 col-form-label">Phone</label>
+                <div class="col-md-4">
+                    <span th:errors="*{phone}" class="text-secondary" style="color: red">Error</span>
+                    <input type="text" th:field="*{phone}"  class="form-control" id="name"  >
+                </div>
+            </div>
+            
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="userRole" class="col-md-2 col-form-label">Gender</label>
+                <div class="col-md-4">
+                    <select th:field="*{gender}" class="form-select" aria-label="Education" id="userRole">
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="userRole" class="col-md-2 col-form-label">Education</label>
+                <div class="col-md-4">
+                    <select th:field="*{education}" class="form-select" aria-label="Education" id="userRole">
+                        <option value="DEGREE">DEGREE</option>
+                        <option value="DIPLOMA">DIPLOMA</option>
+                        <option value="CERTIFICATE">CERTIFICATE</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="userRole" class="col-md-2 col-form-label">Course</label>
+                <div class="col-md-4">
+                    <div th:each="c : ${course}">
+                        <input  type="checkbox" th:text="${c.name}" th:value="${c.id}" th:field="*{courses}" id="">
+                    </div>
+                    
+                </div>
+            </div>
+
+
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="userRole" class="col-md-2 col-form-label">Status</label>
+                <div class="col-md-4">
+                    <select th:field="*{status}" class="form-select" aria-label="Education" id="userRole">
+                        <option value="ACTIVE">Active</option>
+                        <option value="DELETED">Deleted</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-2"></div>
+                <label for="Passowrd" class="col-md-2 col-form-label">Photo</label>
+                <div class="col-md-4">
+                    <input type="file" th:field="*{file}"  class="form-control" id="name"  >
+                </div>
+            </div>
+            
+            <div class="row mb-4">
+                <div class="col-md-4"></div>
+
+                <div class="col-md-6">
+
+
+                    <button type="submit" class="btn btn-secondary col-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Student Registration</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <h5 style="color: rgb(127, 209, 131);">Registered Succesfully !</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success col-md-2" data-bs-dismiss="modal">Ok</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragment/main :: footer}"></div>
+    <script>
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+          } else {
+          dropdownContent.style.display = "block";
+          }
+          });
+        }
+    </script>
+</div>
+</body>
+
+</html>
+
+

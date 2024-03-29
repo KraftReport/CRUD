@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{fragment/main::header}"></head>
+
+<body>
+    <div id="testheader" th:replace="~{fragment/main::navbar}"> </div>
+
+</div>
+    <!-- <div id="testsidebar">Hello World </div> -->
+    <div class="container">
+    <div class="sidenav" th:replace="~{fragment/main :: sidebar}"> </div>
+    <div class="main_contents">
+        <div id="sub_content">
+            <form th:action="@{/admin/userSearch}" method="post" class="row g-3 mt-3 ms-2">
+                <div class="col-auto">
+                    <label for="staticEmail2" class="visually-hidden">User Id</label>
+                    <input type="text" name="id" class="form-control" id="staticEmail2" placeholder="User ID">
+                </div>
+                <div class="col-auto">
+                    <label for="inputPassword2" class="visually-hidden">User Name</label>
+                    <input type="text" name="name" class="form-control" id="inputPassword2" placeholder="User Name">
+                </div>
+                <div class="col-auto">
+                    <label for="inputPassword2" class="visually-hidden">User Email</label>
+                    <input type="text" name="email" class="form-control" id="inputPassword2" placeholder="Email">
+                </div>
+                <div class="col-auto">
+                    <label for="inputPassword2" class="visually-hidden">User Role</label>
+                    <input type="text" name="role" class="form-control" id="inputPassword2" placeholder="Role">
+                </div>
+
+
+
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">Search</button>
+                </div>
+                <div class="col-auto">
+                    <a th:href="@{/member/userRegister}"><button type="button" class="btn btn-secondary">Add</button></a>
+                </div>
+            </form>
+            <table class="table table-striped" id="table">
+                <thead>
+                <tr>
+
+                    <th scope="col">Profile</th>
+                    <th scope="col">User ID</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Details</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="u : ${user}">
+
+
+                    <td><img  style="width: 120px; height: 100px;"  th:src="@{'data:image/jpeg;base64,'+${u.photoString}}"  alt="image" ></td>
+                    <td th:text="${u.id}"></td>
+                    <td th:text="${u.name}"></td>
+                    <td th:text="${u.email}"></td>
+                    <td th:text="${u.address}"></td>
+
+                    <td>
+                        <a th:href="@{/member/userUpdate(id=${u.id})}"><button type="button" class="btn btn-success">Update</button></a>
+                        <a th:href="@{/admin/delete(id=${u.id})}"><button type="button" class="btn btn-danger">Delete</button></a>
+                    </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Student Deletion</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <h5 style="color: rgb(127, 209, 131);">Are you sure want to delete !</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success col-md-2" data-bs-dismiss="modal">Ok</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragment/main :: footer}"></div>
+<script>
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var dropdownContent = this.nextElementSibling;
+      if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+      } else {
+      dropdownContent.style.display = "block";
+      }
+      });
+    }
+</script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+<body>
+
+</body>
+
